@@ -14,8 +14,8 @@ client = boto3.client(
 )
 
 default_args = {
-    'owner': 'Ney',
-    'start_date': datetime(2022, 4, 2)
+    'owner': 'Nicolas',
+    'start_date': datetime(2022, 11, 15)
 }
 
 @dag(default_args=default_args, schedule_interval="@once", description="Executa um job Spark no EMR", catchup=False, tags=['Spark','EMR'])
@@ -53,7 +53,7 @@ def indicadores_titanic():
                         'InstanceCount': 1,
                     }
                 ],
-                'Ec2KeyName': 'ney-pucminas-testes',
+                'Ec2KeyName': 'nicolas-pucminas-testes',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
                 'Ec2SubnetId': 'subnet-09b06b5d8fc0d0062'
