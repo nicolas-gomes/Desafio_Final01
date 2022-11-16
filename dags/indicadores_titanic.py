@@ -30,11 +30,11 @@ def indicadores_titanic():
     @task
     def emr_create_cluster():
         cluster_id = client.run_job_flow( # Cria um cluster EMR
-            Name='Automated_EMR_Ney',
+            Name='Automated_EMR_Nicolas',
             ServiceRole='EMR_DefaultRole',
             JobFlowRole='EMR_EC2_DefaultRole',
             VisibleToAllUsers=True,
-            LogUri='s3://aws-logs-539445819060-us-east-1/elasticmapreduce/',
+            LogUri='s3://aws-logs-782513929359-us-east-1/elasticmapreduce/',
             ReleaseLabel='emr-6.8.0',
             Instances={
                 'InstanceGroups': [
