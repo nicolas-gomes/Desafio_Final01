@@ -875,10 +875,10 @@ webserver:
   defaultUser:
     enabled: true
     role: Admin
-    username: neylsoncrepalde
-    email: neylson.crepalde@a3data.com.br
-    firstName: Neylson
-    lastName: Crepalde
+    username: nicolas.gomes
+    email: nicolas.oliveira@hotmail.com.com.br
+    firstName: Nicolas
+    lastName: Gomes
     password: admin
 
   # Launch additional containers into webserver.
