@@ -93,7 +93,7 @@ def indicadores_titanic():
                                 '--master', 'yarn',
                                 '--deploy-mode', 'cluster',
                                 '--packages', 'io.delta:delta-core_2.12:2.1.0',
-                                's3://emr-code-539445819060/ney/pyspark/titanic_example_delta.py'
+                                's3://nicolas-scripts-20221511/pyspark/IBGE.ipynb'
                                 ]
                     }
                 }
