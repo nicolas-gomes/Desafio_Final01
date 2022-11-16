@@ -56,7 +56,7 @@ def indicadores_titanic():
                 'Ec2KeyName': 'nicolas-pucminas-testes',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
-                'Ec2SubnetId': 'subnet-09b06b5d8fc0d0062'
+                'Ec2SubnetId': 'subnet-06e6f950e9bd3223d'
             },
 
             Applications=[{'Name': 'Spark'}, {'Name': 'Hive'}],
