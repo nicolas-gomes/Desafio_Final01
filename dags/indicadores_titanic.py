@@ -92,7 +92,6 @@ def indicadores_titanic():
                         'Args': ['spark-submit',
                                 '--master', 'yarn',
                                 '--deploy-mode', 'cluster',
-                                '--packages', 'io.delta:delta-core_2.12:2.1.0',
                                 's3://nicolas-scripts-20221511/pyspark/IBGE.ipynb'
                                 ]
                     }
