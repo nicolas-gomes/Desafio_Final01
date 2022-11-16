@@ -19,7 +19,7 @@ default_args = {
 }
 
 @dag(default_args=default_args, schedule_interval="@once", description="Executa um job Spark no EMR", catchup=False, tags=['Spark','EMR'])
-def indicadores_titanic():
+def indicadores_IBGE():
 
     inicio = DummyOperator(task_id='inicio')
 
@@ -80,12 +80,12 @@ def indicadores_titanic():
 
     
     @task
-    def emr_process_titanic(cid: str):
+    def emr_process_ibge_part1(cid: str):
         newstep = client.add_job_flow_steps(
             JobFlowId=cid,
             Steps=[
                 {
-                    'Name': 'Processa indicadores Titanic',
+                    'Name': 'Processa indicadores IBGE Parte 1',
                     'ActionOnFailure': "CONTINUE",
                     'HadoopJarStep': {
                         'Jar': 'command-runner.jar',
@@ -93,6 +93,27 @@ def indicadores_titanic():
                                 '--master', 'yarn',
                                 '--deploy-mode', 'cluster',
                                 's3://nicolas-scripts-20221511/pyspark/IBGE.py'
+                                ]
+                    }
+                }
+            ]
+        )
+        return newstep['StepIds'][0]
+    
+    @task
+    def emr_process_ibge_part2(cid: str):
+        newstep = client.add_job_flow_steps(
+            JobFlowId=cid,
+            Steps=[
+                {
+                    'Name': 'Processa indicadores IBGE Parte 2',
+                    'ActionOnFailure': "CONTINUE",
+                    'HadoopJarStep': {
+                        'Jar': 'command-runner.jar',
+                        'Args': ['spark-submit',
+                                '--master', 'yarn',
+                                '--deploy-mode', 'cluster',
+                                's3://nicolas-scripts-20221511/pyspark/IBGE_PARQUET.py'
                                 ]
                     }
                 }
@@ -128,13 +149,16 @@ def indicadores_titanic():
 
     esperacluster = wait_emr_cluster(cluster)
 
-    indicadores = emr_process_titanic(cluster) 
+    indicadores = emr_process_ibge_part1(cluster) 
     esperacluster >> indicadores
 
-    wait_step = wait_emr_job(cluster, indicadores)
+    indicadores_parquet = emr_process_ibge_part2(cluster)
+    esperacluster >> indicadores_parquet
+
+    wait_step = wait_emr_job(cluster, indicadores_parquet)
 
     terminacluster = terminate_emr_cluster(cluster)
     wait_step >> terminacluster >> fim
     #---------------
 
-execucao = indicadores_titanic()
+execucao = indicadores_IBGE()
