@@ -150,10 +150,11 @@ def indicadores_IBGE():
     esperacluster = wait_emr_cluster(cluster)
 
     indicadores = emr_process_ibge_part1(cluster) 
-    esperacluster >> indicadores
-
     indicadores_parquet = emr_process_ibge_part2(cluster)
-    esperacluster >> indicadores_parquet
+    esperacluster >> indicadores >> indicadores_parquet
+
+    #indicadores_parquet = emr_process_ibge_part2(cluster)
+    #esperacluster >> indicadores_parquet
 
     wait_step = wait_emr_job(cluster, indicadores_parquet)
 
