@@ -92,7 +92,7 @@ def indicadores_titanic():
                         'Args': ['spark-submit',
                                 '--master', 'yarn',
                                 '--deploy-mode', 'cluster',
-                                's3://nicolas-scripts-20221511/pyspark/IBGE.ipynb'
+                                's3://nicolas-scripts-20221511/pyspark/IBGE.py'
                                 ]
                     }
                 }
