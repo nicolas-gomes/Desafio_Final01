@@ -876,7 +876,7 @@ webserver:
     enabled: true
     role: Admin
     username: nicolas.gomes
-    email: nicolas.oliveira@hotmail.com.com.br
+    email: nicolas.oliveira1998@hotmail.com.com.br
     firstName: Nicolas
     lastName: Gomes
     password: admin
@@ -1555,8 +1555,8 @@ dags:
     # ssh examples ssh://git@github.com/apache/airflow.git
     # git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    repo: https://github.com/neylsoncrepalde/pucminas-data-pipelines.git
-    branch: main
+    repo: https://github.com/nicolas-gomes/Trabalho_Final.git
+    branch: master
     rev: HEAD
     depth: 1
     # the number of consecutive failures allowed before aborting
